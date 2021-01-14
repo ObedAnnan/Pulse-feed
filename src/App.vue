@@ -1,12 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="columns">
+        <div class="column is-one-quarter no-padding">
+            <SubscriptionList @change-active-subscription="setActiveSubscription"></SubscriptionList>
+        </div>
+        <div class="column no-padding">
+            <ArticleList :feedUrl="feedUrl"/>
+        </div>
     </div>
-    <router-view/>
-  </div>
 </template>
+
+<script>
+    import SubscriptionList from './components/SubscriptionList'
+    import ArticleList from "./components/ArticleList";
+
+    export default {
+        name: 'App',
+        components: {
+            ArticleList,
+            SubscriptionList
+        },
+        data() {
+            return {
+                feedUrl: ''
+            };
+        },
+        methods: {
+            setActiveSubscription(url) {
+                this.feedUrl = url;
+            },
+        },
+    }
+</script>
 
 <style lang="scss">
 #app {
